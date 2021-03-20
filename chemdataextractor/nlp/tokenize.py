@@ -653,7 +653,7 @@ class ChemWordTokenizer(WordTokenizer):
         for i, char in enumerate(text):
             before = text[:i]
             after = text[i+1:]
-            if char in {':', ';'}:
+            if char in {';'}:
                 # Split around colon unless it looks like we're in a chemical name
                 if not (before and after and after[0].isdigit() and before.rstrip('′\'')[-1:].isdigit() and '-' in after) and not (self.NO_SPLIT_CHEM.search(before) and self.NO_SPLIT_CHEM.search(after)):
                     return self._split_span(span, i, 1)
