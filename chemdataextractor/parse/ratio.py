@@ -33,16 +33,14 @@ ro = (prefix + value)(u'ro')
 class RoParser(BaseParser):
     """"""
     root = ro
+    
+    def __init__(self):
+        pass
 
     def interpret(self, result, start, end):
         compound = Compound(
-         ratio_of=[
-               RatioOf(
-                    value=result.xpath('./text()'))
-             
-                )
-            ]
+      
+                  value=result.xpath('./text()')
         )
 
         yield compound
-
