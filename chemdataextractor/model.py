@@ -439,6 +439,7 @@ class Compound(BaseModel):
     names = ListType(StringType())
     labels = ListType(StringType())
     roles = ListType(StringType())
+    ratio = ListType(StringType())
     nmr_spectra = ListType(ModelType(NmrSpectrum))
     ir_spectra = ListType(ModelType(IrSpectrum))
     uvvis_spectra = ListType(ModelType(UvvisSpectrum))
@@ -502,8 +503,8 @@ class Compound(BaseModel):
     def is_id_only(self):
         """Return True if identifier information only."""
         for key, value in self.items():
-            if key not in {'names', 'labels', 'roles'} and value:
+            if key not in {'names', 'labels', 'roles', 'ratio'} and value:
                 return False
-        if self.names or self.labels:
+        if self.names or self.labels or self.ratio:
             return True
         return False
