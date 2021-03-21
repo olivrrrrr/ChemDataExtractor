@@ -1,19 +1,3 @@
-"""
-chemdataextractor.parse.ratio
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Ratio text parser.
-
-"""
-
-
-from __future__ import absolute_import
-from __future__ import division
-from __future__ import print_function
-from __future__ import unicode_literals
-import logging
-import re
-
-
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -24,24 +8,19 @@ from .elements import W, R, Optional
 from ..model import StringType, Compound
 from .actions import merge
 
+ratio = R(u'\w+:\w+')(u'value')
 
-prefix = (I(u'ratio') | I(u'of') | I(u'and')).hide()
-
-value = R(u'\w+:\w+')(u'value')
-
-ro = (prefix + value)(u'ro')
-
-class RoParser(BaseParser):
+class RatioParser(BaseParser):
     """"""
-    root = ro
+    root = ratio
     
     def __init__(self):
         pass
 
     def interpret(self, result, start, end):
-        compound = Compound(
+        c = Compound(
       
-                  value=result.xpath('./text()')
+                  ratio=result.xpath('./text()')
         )
 
-        yield compound
+        yield c
